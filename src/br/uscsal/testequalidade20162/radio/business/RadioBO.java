@@ -21,6 +21,7 @@ public class RadioBO {
 		Musica musica = new Musica(nome, duracao, nomeInterpretePrincipal);
 		MusicaDao.incluir(musica);
 	}
+	
 
 	public static void adicionarMusica(String tituloAlbum, String nomeMusica) throws RegistroNaoEncontradoException,
 			RegistroDuplicadoException {
@@ -29,6 +30,11 @@ public class RadioBO {
 		album.adicionarMusica(musica);
 	}
 
+	public void adicionarMusicaInstancia(String tituloAlbum, String nomeMusica) throws RegistroNaoEncontradoException,
+	RegistroDuplicadoException {
+		adicionarMusica(tituloAlbum, nomeMusica);
+	}
+	
 	public static void removerMusica(String tituloAlbum, String nomeMusica) throws RegistroNaoEncontradoException {
 		Album album = AlbumDao.buscarPorTitulo(tituloAlbum);
 		Musica musica = MusicaDao.buscarPorNome(nomeMusica);

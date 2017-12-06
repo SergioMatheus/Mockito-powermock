@@ -1,7 +1,10 @@
 package br.uscsal.testequalidade20162.radio.business;
 
-import org.junit.Before;
-import org.mockito.MockitoAnnotations;
+import org.junit.Test;
+import org.mockito.Mockito;
+
+import br.uscsal.testequalidade20162.radio.exceptions.RegistroDuplicadoException;
+import br.uscsal.testequalidade20162.radio.exceptions.RegistroNaoEncontradoException;
 
 public class RadioBOIntegradoTest {
 
@@ -9,14 +12,17 @@ public class RadioBOIntegradoTest {
 	// RegistroNaoEncontradoException,
 	// Verificar se a inclusão de uma música duplicada em um album retorna a exceção adequada.
 	// LEMBRE-SE DE QUE ESTE TESTE DEVE SER INTEGRADO!!!
-
-	@Before
-	public void setUp() {
-		MockitoAnnotations.initMocks(this);
-	}
-		
 	
-	public void adicionarAtorNascidoAntesLancamentoFilme() {
+	RadioBO radio= Mockito.mock(RadioBO.class);
+		
+	@Test
+	public void testeIntegradoAdicionarMusica() throws RegistroNaoEncontradoException, RegistroDuplicadoException {
+		
+		String tituloAlbum = "Esú";
+		String nomeMusica = "Esú";
+		Mockito.doNothing().when(radio).adicionarMusicaInstancia(tituloAlbum, nomeMusica);
+		radio.adicionarMusicaInstancia(tituloAlbum, nomeMusica);
+		Mockito.verify(radio).adicionarMusicaInstancia(tituloAlbum, nomeMusica);	
 		
 	}	
 }
