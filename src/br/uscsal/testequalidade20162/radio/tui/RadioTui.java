@@ -82,8 +82,8 @@ public class RadioTui {
 		return data;
 	}
 
-	private static String obterTexto(String mensagem) {
-		System.out.println(mensagem);
+	public static String obterTexto(String mensagem) {
+		System.out.print(mensagem);
 		return sc.nextLine();
 	}
 
