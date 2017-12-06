@@ -1,7 +1,6 @@
 package br.uscsal.testequalidade20162.radio.business;
 
 import java.util.Date;
-
 import org.junit.Test;
 
 import br.uscsal.testequalidade20162.radio.enums.TipoMidia;
@@ -32,7 +31,7 @@ public class RadioBOUnitarioTest {
 		String nomeMusica = "De saco cheio e de mal humor";
 		Date dataLancamento = null;
 		Integer duracao = 2;
-		String nomeInterpretePrincipal=" ";
+		String nomeInterpretePrincipal="Matanza";
 		TipoMidia tipoMidia = TipoMidia.DIGITAL;
 		RadioBO.incluirAlbum(tituloAlbum, dataLancamento, tipoMidia);
 		RadioBO.incluirMusica(nomeMusica, duracao, nomeInterpretePrincipal);
