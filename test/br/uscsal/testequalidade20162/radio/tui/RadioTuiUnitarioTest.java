@@ -1,35 +1,38 @@
 package br.uscsal.testequalidade20162.radio.tui;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.reflect.Whitebox;
 
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({RadioTui.class})
 public class RadioTuiUnitarioTest {
 	
-	// Método a ser testado: private static Integer obterTexto(String mensagem)
-	// Verificar o processo de entrada e saída para obtenção de um texto.
+	private final String musica = "Crossfire";
+	
+	// Metodo a ser testado: private static Integer obterTexto(String mensagem)
+	// Verificar o processo de entrada e saida para obtencao de um texto.
 	// Obs: fazer o mock do System.in e do System.out.
 	
 	@Test
-	public void verificarObterTexto() throws Exception {
+	public void verificarObterTexto() throws Exception {	
 		
-		String s="Crossfire\nCrossFire\n";
+		Scanner toddynho = PowerMockito.mock(Scanner.class);		
+		Whitebox.setInternalState(RadioTui.class, "sc", toddynho);
+		PrintStream ps = PowerMockito.mock(PrintStream.class);		
+		System.setOut(ps);
 		
-		InputStream inFake = new ByteArrayInputStream(s.getBytes());
-		System.setIn(inFake);
+		PowerMockito.when(toddynho.nextLine()).thenReturn(musica);
 		
-		OutputStream outFake = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outFake));
-		RadioTui.obterTexto(s);
-		String mensagemAtual= outFake.toString();
-		
-		Assert.assertEquals(s, mensagemAtual);
-
-
+		Whitebox.invokeMethod(RadioTui.class, "obterTexto", musica);
+		Mockito.verify(ps).print(musica);
+				
 	}
 }
